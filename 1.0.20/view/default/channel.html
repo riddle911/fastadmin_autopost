@@ -1,0 +1,59 @@
+{layout name="common/layout" /}
+
+<div class="container"  id="content-container"> 
+    <h1>
+        {cms:channel name="name" /}
+        <ol class="breadcrumb pull-right">
+            <!-- S 面包屑导航 -->
+            {cms:breadcrumb id="item"}
+            <li><a href="{$item.url}">{$item.name}</a></li>
+            {/cms:breadcrumb}
+            <!-- E 面包屑导航 -->
+        </ol>
+    </h1>
+
+    <div class="article-list-body row">
+
+        <div class="col-md-8 col-xs-12 ">
+            <div class="article-section channel-list">
+                <div class="row">
+                    <!-- S 栏目列表 -->
+                    {cms:channellist id="channel" type="son" typeid="$__CHANNEL__.id"}
+                    <div class="col-xs-6">
+                        <h3>{$channel.textlink} <em><a href="{$channel.url}">{:__('More')}</a></em></h3>
+                        {cms:arclist id="row" channel="$channel.id" limit="0,1"}
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="{$row.url}">
+                                    <img class="media-object" width="64" height="64" src="{$row.image}" >
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">{$row.textlink}</h4>
+                                <p>{$row.description|mb_substr=0,40}</p>
+                            </div>
+                        </div>
+                        {/cms:arclist}
+                        <ul class="list-unstyled">
+                            {cms:arclist id="row" channel="$channel.id" limit="1,5"}
+                            <li>
+                                {$row.textlink}
+                                <span class="pull-right">{$row.createtime|date='m-d',###}</span>
+                            </li>
+                            {/cms:arclist}
+                        </ul>
+                    </div>
+                    {/cms:channellist}
+                    <!-- E 栏目列表 -->
+                </div>
+            </div>
+        </div>
+
+        <aside class="col-md-4 article-sidebar">
+            <div class="panel panel-adimg">
+                {cms:block name="sidebarad1" /}
+            </div>
+            {include file="common/sidebar" /}
+        </aside>
+    </div>
+</div>

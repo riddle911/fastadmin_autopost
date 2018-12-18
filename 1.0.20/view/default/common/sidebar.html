@@ -1,0 +1,52 @@
+<!-- S 热门资讯 -->
+<div class="panel panel-default hot-article">
+    <div class="panel-heading">
+        <h3 class="panel-title">{:__('Hot news')}</h3>
+    </div>
+    <div class="panel-body">
+        {cms:arclist id="hot" row="10" orderby="id" orderway="asc"}
+        <div class="media media-number">
+            <div class="media-left">
+                <span class="num">{$i}</span>
+            </div>
+            <div class="media-body">
+                <a class="link-dark" href="{$hot.url}" title="{$hot.title}">{$hot.title}</a>
+            </div>
+        </div>
+        {/cms:arclist}
+    </div>
+</div>
+<!-- E 热门资讯 -->
+
+<!-- S 热门标签 -->
+<div class="panel panel-default hot-tags">
+    <div class="panel-heading">
+        <h3 class="panel-title">{:__('Hot tags')}</h3>
+    </div>
+    <div class="panel-body">
+        {cms:tagslist id="tag" orderby="rand" limit="30"}
+        <a href="{$tag.url}"> <span class="badge"><i class="fa fa-tags"></i> {$tag.name}</span></a>
+        {/cms:tagslist}
+    </div>
+</div>
+<!-- E 热门标签 -->
+
+<!-- S 推荐资讯 -->
+<div class="panel panel-default recommend-article">
+    <div class="panel-heading">
+        <h3 class="panel-title">{:__('Recommend news')}</h3>
+    </div>
+    <div class="panel-body">
+        {cms:arclist id="hot" row="10" flag="recommend|new" orderby="id" orderway="asc"}
+        <div class="media media-number">
+            <div class="media-left">
+                <span class="num">{$i}</span>
+            </div>
+            <div class="media-body">
+                <a class="link-dark" href="{$hot.url}" title="{$hot.title}">{$hot.title}</a>
+            </div>
+        </div>
+        {/cms:arclist}
+    </div>
+</div>
+<!-- E 推荐资讯 -->

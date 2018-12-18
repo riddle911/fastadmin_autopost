@@ -1,0 +1,181 @@
+{layout name="common/layout" /}
+
+<div class="container"  id="content-container"> 
+
+    <div class="article-list-body row">
+
+        <div class="col-md-8 article-detail-main">
+            <section class="article-section article-content">
+                <ol class="breadcrumb">
+                    <!-- S 面包屑导航 -->
+                    {cms:breadcrumb id="item"}
+                    <li><a href="{$item.url}">{$item.name}</a></li>
+                    {/cms:breadcrumb}
+                    <!-- E 面包屑导航 -->
+                </ol>        
+                <div class="article-metas">
+                    <!-- S 标题区域 -->
+                    <div class="pull-left">
+                        <div class="date">
+                            <div class="day">{cms:archives name="createtime|date='d',###" /}</div>
+                            <div class="month">{cms:archives name="createtime|date='m',###" /}{:__('Month')}</div>
+                        </div>
+                    </div>
+                    <div class="metas-body">
+                        <h2 class="title">
+                            {cms:archives name="title" /}
+                        </h2>
+                        <div class="sns">
+                            <span class="views-num">
+                                <i class="fa fa-eye"></i>{cms:archives name="views" /}
+                            </span>
+                            <span class="comment-num">
+                                <i class="fa fa-comments"></i>{cms:archives name="comments" /}
+                            </span>
+                            <span class="like-num">
+                                <i class="fa fa-thumbs-o-up"></i><span class="js-like-num">{cms:archives name="likes" /}</span>
+                            </span>
+                        </div>
+                    </div>
+                    <!-- E 标题区域 -->
+                </div>        
+                <div class="article-image">
+                    <!-- S 瀑布流图片 -->
+                    <div id="productdata">
+                        {volist name="$__ARCHIVES__.productdata|explode=',',###" id="image"}
+                        <a href="{$image|str_replace='_m.jpg','_b.jpg',###}" class="productimg">
+                            <img alt="" src="{$image}" />
+                        </a>
+                        {/volist}
+                    </div>
+                    <!-- E 瀑布流图片 -->
+                </div>
+                <div class="article-text">
+                    <!-- S 正文 -->
+                    <p>
+                        {cms:archives name="content" /}
+                    </p>
+                    <!-- E 正文 -->
+                </div>
+
+                <div class="product-like-wrapper">
+                    <!-- S 赞踩 -->
+                    <a class="product-like" data-action="vote" data-type="like" data-id="{cms:archives name='id' /}" href="javascript:;" title="赞"><i class="fa fa-thumbs-up"></i></a>
+                    <div class="like-bar-wrapper" data-likes="{cms:archives name='likes' /}" data-dislikes="{cms:archives name='dislikes' /}">
+                        <div class="bar"><span style="width: {cms:archives name='likeratio'}%;"></span></div>
+                        <div class="num"><i>{cms:archives name='likes' /}</i> : <span>{cms:archives name='dislikes' /}</span></div>
+                    </div>
+                    <a class="product-dislike" data-action="vote" data-type="dislike" data-id="{cms:archives name='id' /}" href="javascript:;" title="踩"><i class="fa fa-thumbs-down"></i></a>
+                    <!-- E 赞踩 -->
+                </div>
+
+                <div class="entry-meta">
+                    <ul>
+                        <!-- S 归档 -->
+                        <li>{:__('Article category')}：<a href="{cms:channel name='url' /}">{cms:channel name="name" /}</a></li>
+                        <li>{:__('Article tags')}：{volist name="$__ARCHIVES__.tagslist" id="tag"}<a href="{$tag.url}" rel="tag">{$tag.name}</a>{if isset($__LIST__[$i])},{/if} {/volist}</li>
+                        <li>{:__('Article views')}：<span id="post_view_count">{cms:archives name="views" /}</span> 次浏览</li>
+                        <li>{:__('Post date')}：{cms:archives name="createtime|datetime" /}</li>
+                        <li>{:__('Article url')}：<a href="{cms:archives name="fullurl" /}">{cms:archives name="fullurl" /}</a></li>
+                        <!-- S 归档 -->
+                    </ul>
+                    <ul class="entry-relate-links">
+                        <!-- S 上一篇下一篇 -->
+                        {cms:prevnext id="prev" type="prev" archives="__ARCHIVES__.id" channel="__CHANNEL__.id"}
+                        <li>
+                            <span>{:__('Prev')} &gt;：</span>
+                            <a href="{$prev.url}">{$prev.title}</a>
+                        </li>
+                        {/cms:prevnext}
+
+                        {cms:prevnext id="next" type="next" archives="__ARCHIVES__.id" channel="__CHANNEL__.id"}
+                        <li>
+                            <span>{:__('Next')} &gt;：</span>
+                            <a href="{$next.url}">{$next.title}</a>
+                        </li>
+                        {/cms:prevnext}
+                        <!-- E 上一篇下一篇 -->
+                    </ul>
+                </div>
+
+                <div class="product-action-btn">
+                    <div class="pull-left">
+                        <a href="javascript:void(0);" name="anchor" id="anchor"></a>
+                        <!-- S 收藏 -->
+                        <a class="product-favorite addbookbark" href="javascript:;">
+                            <i class="fa fa-heart"></i> {:__('Favourite')}
+                        </a>
+                        <!-- E 收藏 -->
+                        <!-- S 分享 -->
+                        <span class="bdsharebuttonbox share-box bdshare-button-style0-16">
+                            <a class="bds_more share-box-a" data-cmd="more">
+                                <i class="fa fa-share"></i> {:__('Share')}
+                            </a>
+                        </span>
+                        <!-- E 分享 -->
+                    </div>
+                    <div class="pull-right">
+                        <!-- S 举报 -->
+                        <div class="report-wrapper">
+                            <a href="javascript:;">{:__('Report')}</a>
+                            <span>|</span>
+                            <a href="javascript:;">{:__('Error report')}</a>
+                        </div>
+                        <!-- E 举报 -->
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="related-article">
+                    <div class="row">
+                        <!-- S 相关文章 -->
+                        {cms:arclist id="relate" row="3"}
+                        <a class="col-sm-4" href="{$relate.url}">
+                            <div class="related-item">
+                                <div class="title">
+                                    {$relate.title}
+                                </div>
+                                <img class="img-responsive" src="{$relate.image}" alt="{$relate.title}">
+                                <div class="image-overlay"></div>
+                            </div>
+                        </a>
+                        {/cms:arclist}
+                        <!-- E 相关文章 -->
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </section>
+
+            <div class="panel panel-default comment-list" id="comments">
+                <div class="panel-heading">
+                    {:__('Comment list')}({cms:archives name="comments" /})
+                </div>
+                <div class="panel-body">
+                    {include file="common/comment" type="archives" aid="__ARCHIVES__.id"}
+                </div>
+            </div>
+
+        </div>
+
+        <aside class="col-md-4 article-sidebar">
+            <div class="panel panel-adimg">
+                {cms:block name="sidebarad1" /}
+            </div>
+            {include file="common/sidebar" /}
+        </aside>
+    </div>
+</div>
+<link rel="stylesheet" href="__ADDON__/css/swipebox.min.css">
+<link rel="stylesheet" href="__ADDON__/css/jquery.justifiedGallery.min.css">
+<script type="text/javascript" src="__ADDON__/js/jquery.swipebox.min.js"></script>
+<script type="text/javascript" src="__ADDON__/js/jquery.justifiedGallery.min.js"></script>
+<script type="text/javascript">
+    $('#productdata').justifiedGallery({
+        lastRow: 'nojustify',
+        rowHeight: 140,
+        rel: 'gallery2',
+        margins: 1
+    }).on('jg.complete', function () {
+        $('.productimg').swipebox();
+    });
+</script>

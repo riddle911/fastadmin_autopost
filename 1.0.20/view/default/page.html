@@ -1,0 +1,41 @@
+{layout name="common/layout" /}
+
+<div class="container" id="content-container">
+
+    <div class="article-list-body row">
+
+        <div class="col-md-12 article-detail-main">
+            <section class="article-section article-content">
+                <div class="article-metas">
+                    <!-- S 标题区域 -->
+                    <div class="metas-body text-center">
+                        <h2 class="title">
+                            {cms:page name="title" /}
+                        </h2>
+                    </div>
+                    <!-- E 标题区域 -->
+                </div>        
+                <div class="article-text">
+                    <!-- S 正文 -->
+                    <p>
+                        {cms:page name="content" /}
+                    </p>
+                    <!-- E 正文 -->
+                </div>
+
+                <div class="clearfix"></div>
+            </section>
+
+
+            <div class="panel panel-default comment-list" id="comments">
+                <div class="panel-heading">
+                    {:__('Comment list')}({cms:page name="comments" /})
+                </div>
+                <div class="panel-body">
+                    {include file="common/comment" type="page" aid="__PAGE__.id"}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

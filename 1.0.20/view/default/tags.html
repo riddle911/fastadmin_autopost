@@ -1,0 +1,55 @@
+{layout name="common/layout" /}
+
+<div class="container"  id="content-container"> 
+    <h1>
+        {cms:tags name="name" /}
+        <ol class="breadcrumb pull-right">
+            <!-- S 面包屑导航 -->
+            {cms:breadcrumb id="item"}
+            <li><a href="{$item.url}">{$item.name}</a></li>
+            {/cms:breadcrumb}
+            <!-- E 面包屑导航 -->
+        </ol>
+    </h1>
+
+    <div class="article-filter">
+        <ul class="nav nav-sort clearfix">
+            <!-- S 排序 -->
+            {cms:pageorder id="order"}
+            <li>
+                <a href="{$order.url}" class="{$order.active?'active':''}">
+                    {$order.title}
+                </a>
+            </li>
+            {/cms:pageorder}
+            <!-- E 排序 -->
+        </ul>
+    </div>
+
+    <div class="article-list-body row">
+
+        <div class="col-md-8 article-list-main">
+            
+            <!-- S 列表 -->
+            {cms:pagelist id="item"}
+            {include file="common/item"}
+            {/cms:pagelist}
+            <!-- E 列表 -->
+            
+            <!-- S 分页栏 -->
+            <div class="text-center">
+                {cms:pageinfo type="full" /} 
+            </div>
+            <!-- E 分页栏 -->
+            
+        </div>
+
+        <aside class="col-md-4 article-sidebar">
+            <div class="panel panel-adimg">
+                {cms:block name="sidebarad1" /}
+            </div>
+            
+            {include file="common/sidebar" /}
+        </aside>
+    </div>
+</div>
