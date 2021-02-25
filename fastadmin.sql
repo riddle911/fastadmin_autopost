@@ -4,8 +4,8 @@
  Source Server         : qq
  Source Server Type    : MySQL
  Source Server Version : 50557
- Source Host           : 118.24.119.49:3306
- Source Schema         : fastadmin
+ Source Host           : 
+ Source Schema         : 
 
  Target Server Type    : MySQL
  Target Server Version : 50557
